@@ -46,7 +46,7 @@
 
 !&tao_template_graph
   graph_index = 1
-  graph%name = "1"
+  graph%name = "0"
   graph%type = "floor_plan"
   graph%box = 1, 1, 1, 1
   graph%margin = 0.10, 0.10, 0.10, 0.10, "%BOX"
@@ -62,7 +62,7 @@
   graph%floor_plan%correct_distortion = T
   graph%floor_plan%size_is_absolute = T
   graph%floor_plan%view = "xz" ! Looking from beneath
-  graph%floor_plan%orbit_scale = 100
+  graph%floor_plan%orbit_scale = 500
 !/
 
 !------------------ layout ------
@@ -101,9 +101,8 @@
 /       
 
 !&floor_plan_drawing
-  include_default_shapes = T
-  ele_shape(1)  = "Quadrupole::*"      "Box"      "Red"     1     'none'
-  ele_shape(2)  = "SBend::*"           "Box"      "Blue"      1     'none'
+  ele_shape(1)  = "Quadrupole::*q"      "Box"      "Red"     1     'none'
+  ele_shape(2)  = "SBend::*"           "Box"      "Green"      1     'none'
   ele_shape(3)  = "wiggler::*"         "XBox"     "Orange"   1    'none'
   ele_shape(4)  = "Sextupole::*"       "Box"      "orange"   1    'none'
   ele_shape(5)  = "hkicker::*"         "XBox"     "Red"      1    'none'
@@ -112,5 +111,5 @@
   ele_shape(8) = "SOLENOID::*"        "Xbox"     "orange"    3.5	  'none'
   ele_shape(9) = "rfcavity::*"        "XBox"     "Green"     2.5    'none'
   ele_shape(10) = "marker::*"		"circle"     "black"	 0.5    'none'
-  ele_shape(11) = "elseparator::*"        "Box"     "Green"     1    'name'
+  ele_shape(11) = "elseparator::*"        "Box"     "Green"     1    'none'
 !/  
