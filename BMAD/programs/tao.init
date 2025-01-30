@@ -5,7 +5,7 @@
 /
 
 &tao_design_lattice
-  design_lattice(1)%file='/home/bell/GIT_PROJECTS/8shape/BMAD/lattices/8shape_secondlook.bmad'
+  design_lattice(1)%file='/home/bell/GIT_PROJECTS/8shape/BMAD/lattices/8shape_firstlook.bmad'
 
 /
 
