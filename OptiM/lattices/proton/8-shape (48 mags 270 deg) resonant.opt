@@ -1,0 +1,237 @@
+#NICA Accelerator Complex
+#8-shape NICA 
+#Each arc has 52 magnets, Field=1.8 Tesla 
+
+#-------MAIN parameters------------------------------------
+#proton mass in  [kG] m_p---------------------------------
+	$m_p=1.6726e-27;  =>  1.6726e-27
+#el  charge in [C]-----------------------------------------
+	$Qp=1.6022e-19;  =>  1.6022e-19
+#speed of ligt in [m/sec]-----------------------------------
+	$c_light=$c*0.01;  =>   299792458
+#Unified atomic mass unit [MeV/u]--------------------------
+	$NMASS=931.494061;  =>  931.494061
+#Kinetic energy [MeV/u]-------------------------------------
+	$W=12444.69;  =>
+#Charge and mass-------------------------------------------
+	$Z=1.;  =>           1
+	$A=1.;  =>           1
+#GAMMA------------------------------------------------------
+	$GAMMA=1+($W/($NMASS));  =>  14.3599241
+	$E_kin = ($GAMMA-1) * $NMASS * $A;  =>    12444.69
+
+	$GAMMA=($NMASS+$W)/$NMASS;  =>  14.3599241
+	$BETA=sqrt(1.-1./$GAMMA^2);  =>  0.99757231
+#ENERGY & MASS----------------------------------------------
+	$Energy=$W*$A/$Z ;  =>    12444.69
+	$Mass=$NMASS*$A/$Z;  =>  931.494061
+#Beam particle momentum [MeV/u]-----------------------------
+	$P0=$NMASS*$BETA*$GAMMA;  =>  13343.7108
+#Magnetic rigidity [kGs*cm]---------------------------------
+	$BRHO=$A/$Z*$P0/$c*1.e+11;  =>  44509.8283
+#Rigidity of ring in [T*m]----------------------------------
+	$BR=$BRHO/1000;  =>  44.5098283
+#Magnetic field in magnet in [Tesla]------------------------
+	$B=1.8;  =>         1.8
+	$R=$BR/$B;  =>  24.7276824
+#Full length of all magnets 2pi*R in [m]------------------
+	$L_mags=2*$pi*$R;  =>  155.368611
+
+#=========ONE ARC STRUCTURE============================
+#
+#FROM MADX-file: nuclotron_fodo.madx
+#ss:	line:=(qf, dr1, qd, dr1);
+#cell:	line:=(qf, dr2, bm, dr3, bm, dr4, qd, dr2, bm, dr3, bm, dr4);
+#octant:	line:=(ss, 3*(cell));
+#nuclotron:	line:=(8*(octant));
+# 
+# arc=3 cells
+# 
+# number of magnets per arc
+$n_mag=6;  =>           6
+# number of arcs
+$n_arc=8;  =>           8
+# number of magnet on 8 arcs
+$N_mag=$n_mag*$n_arc        ;  =>          48
+#Lengt of one magnet in [cm]
+$L_mag=$L_mags/$N_mag;  =>  178.931916
+# angle of bending per one magnet in [deg]------------
+$ang_B=$L_mag/($L_mags)*360;  =>         7.5
+# total angle of bending in the ring in [deg]---------
+$ang_ring=$ang_B*$N_mag;  =>         360
+#=====================================================
+
+
+#*******************************************************************************************
+OptiM
+Energy[MeV]=$W*$A/$Z  Mass[MeV]=$NMASS*$A/$Z
+Emittance: ex[cm]=0.002  ey[cm]=0.002  DP/P=0.001 
+Initial:	BetaX[cm]=1481.05 	BetaY[cm]=1141.73 
+	AlfaX=5.63091e-06 	AlfaY=0.00294197 
+	DispersX[cm]=-0.411573 	DispersY[cm]=0 
+	Dsp_PrimeX=0.000111827 	DspPrimeY=0 
+	Dsp_PrimeX=0.0 		DspPrimeY=0 
+	tetaX[deg]=0        	tetaY[deg]=0    
+begin lattice. Number of periods=1 
+
+#====================================ARC===========================================================
+QD
+OBM BM1 OBMBM BM1 OBM QF2 QF2 OBM BM1 OBMBM BM1 OBM QD QD
+OBM BM1 OBMBM BM1 OBM QF1 QF1 OBM BM1 OBMBM BM1 OBM QD QD
+OBM BM1 OBMBM BM1 OBM QF2 QF2 OBM BM1 OBMBM BM1 OBM QD QD
+
+OBM BM1 OBMBM BM1 OBM QF2 QF2 OBM BM1 OBMBM BM1 OBM QD QD
+OBM BM1 OBMBM BM1 OBM QF1 QF1 OBM BM1 OBMBM BM1 OBM QD QD
+OBM BM1 OBMBM BM1 OBM QF2 QF2 OBM BM1 OBMBM BM1 OBM QD QD
+
+OBM BM1 OBMBM BM1 OBM QF2 QF2 OBM BM1 OBMBM BM1 OBM QD QD
+OBM BM1 OBMBM BM1 OBM QF1 QF1 OBM BM1 OBMBM BM1 OBM QD QD
+OBM BM1 OBMBM BM1 OBM QF2 QF2 OBM BM1 OBMBM BM1 OBM QD QD
+
+OBM BM1 OBMBM BM1 OBM QF2 QF2 OBM BM1 OBMBM BM1 OBM QD QD
+OBM BM1 OBMBM BM1 OBM QF1 QF1 OBM BM1 OBMBM BM1 OBM QD QD
+OBM BM1 OBMBM BM1 OBM QF2 QF2 OBM BM1 OBMBM BM1 OBM QD
+
+#====================================SS===========================================================
+QDs
+OD QFs1 QFs1 OD QDs QDs 
+OD QFs1 QFs1 OD QDs QDs
+OD QFs1 QFs1 OD QDs QDs
+OD QFs1 QFs1 OD QDs QDs
+
+OD QFs1 QFs1 OD QDs QDs 
+OD QFs1 QFs1 OD QDs QDs
+OD QFs1 QFs1 OD QDs QDs
+OD QFs1 QFs1 OD QDs QDs
+
+OD QFs1 QFs1 OD QDs QDs 
+OD QFs1 QFs1 OD QDs QDs
+OD QFs1 QFs1 OD QDs QDs
+OD QFs1 QFs1 OD QDs
+
+#====================================ARC===========================================================
+QD 
+OBM BM2 OBMBM BM2 OBM QF2 QF2 OBM BM2 OBMBM BM2 OBM QD QD
+OBM BM2 OBMBM BM2 OBM QF1 QF1 OBM BM2 OBMBM BM2 OBM QD QD
+OBM BM2 OBMBM BM2 OBM QF2 QF2 OBM BM2 OBMBM BM2 OBM QD QD
+
+OBM BM2 OBMBM BM2 OBM QF2 QF2 OBM BM2 OBMBM BM2 OBM QD QD
+OBM BM2 OBMBM BM2 OBM QF1 QF1 OBM BM2 OBMBM BM2 OBM QD QD
+OBM BM2 OBMBM BM2 OBM QF2 QF2 OBM BM2 OBMBM BM2 OBM QD QD
+
+OBM BM2 OBMBM BM2 OBM QF2 QF2 OBM BM2 OBMBM BM2 OBM QD QD
+OBM BM2 OBMBM BM2 OBM QF1 QF1 OBM BM2 OBMBM BM2 OBM QD QD
+OBM BM2 OBMBM BM2 OBM QF2 QF2 OBM BM2 OBMBM BM2 OBM QD QD
+
+OBM BM2 OBMBM BM2 OBM QF2 QF2 OBM BM2 OBMBM BM2 OBM QD QD
+OBM BM2 OBMBM BM2 OBM QF1 QF1 OBM BM2 OBMBM BM2 OBM QD QD
+OBM BM2 OBMBM BM2 OBM QF2 QF2 OBM BM2 OBMBM BM2 OBM QD
+
+#====================================SS===========================================================
+QDs
+OD QFs1 QFs1 OD QDs QDs 
+OD QFs1 QFs1 OD QDs QDs
+OD QFs1 QFs1 OD QDs QDs
+OD QFs1 QFs1 OD QDs QDs
+
+OD QFs1 QFs1 OD QDs QDs 
+OD QFs1 QFs1 OD QDs QDs
+OD QFs1 QFs1 OD QDs QDs
+OD QFs1 QFs1 OD QDs QDs
+
+OD QFs1 QFs1 OD QDs QDs 
+OD QFs1 QFs1 OD QDs QDs
+OD QFs1 QFs1 OD QDs QDs
+OD QFs1 QFs1 OD QDs
+
+end lattice
+
+begin list
+#=======================================================================================
+#---------------------------BENDING MAGNETS---------------------------------
+BM1 	L[cm]=242.7635        	B[kG]=18         	G[kG/cm]=0        	Tilt[deg]=0
+BM2 	L[cm]=242.7635        	B[kG]=-18   	G[kG/cm]=0 
+
+#-----------------------------DRIFTS---------------------------------
+#OD 	L[cm]=290.5 
+OD 	L[cm]=270.0      
+OBM	L[cm]=66.5;
+OBMBM	L[cm]=30.;
+O1 	L[cm]=335 
+O12 	L[cm]=415.025/2  
+O2 	L[cm]=13 
+O3 	L[cm]=9
+O4 	L[cm]=43
+O5 	L[cm]=13    
+  
+#---------------------------QUADRUPOLES-------------------------------
+QD 	L[cm]=23.5       	G[kG/cm]=-1.971  	Tilt[deg]=0
+QF1 	L[cm]=23.5       	G[kG/cm]=2.5935  	Tilt[deg]=0
+QF2 	L[cm]=23.5       	G[kG/cm]=1.6625  	Tilt[deg]=0
+
+QDs 	L[cm]=23.5       	G[kG/cm]=-1.971  	Tilt[deg]=0
+QFs1 	L[cm]=23.5       	G[kG/cm]=1.64    	Tilt[deg]=0
+
+#----------------------------SEXTUPOLES---------------------------------
+SF1 	L[cm]=30         	S[kG/cm/cm)]=0   Tilt[deg]=0
+SF2 	L[cm]=30         	S[kG/cm/cm)]=0   Tilt[deg]=0
+SD 	L[cm]=30         	S[kG/cm/cm)]=0   Tilt[deg]=0
+
+#=======================================================================================
+end list of elements
+
+#====================================SS===========================================================
+QDs
+OD QFs1 QFs1 OD QDs QDs 
+OD QFs1 QFs1 OD QDs QDs
+OD QFs1 QFs1 OD QDs QDs
+OD QFs1 QFs1 OD QDs QDs
+
+OD QFs1 QFs1 OD QDs QDs 
+OD QFs1 QFs1 OD QDs QDs
+OD QFs1 QFs1 OD QDs QDs
+OD QFs1 QFs1 OD QDs QDs
+
+OD QFs1 QFs1 OD QDs QDs 
+OD QFs1 QFs1 OD QDs QDs
+OD QFs1 QFs1 OD QDs QDs
+OD QFs1 QFs1 OD QDs
+
+#====================================ARC===========================================================
+QD 
+OBM BM2 OBMBM BM2 OBM QF2 QF2 OBM BM2 OBMBM BM2 OBM QD QD
+OBM BM2 OBMBM BM2 OBM QF1 QF1 OBM BM2 OBMBM BM2 OBM QD QD
+OBM BM2 OBMBM BM2 OBM QF2 QF2 OBM BM2 OBMBM BM2 OBM QD QD
+
+OBM BM2 OBMBM BM2 OBM QF2 QF2 OBM BM2 OBMBM BM2 OBM QD QD
+OBM BM2 OBMBM BM2 OBM QF1 QF1 OBM BM2 OBMBM BM2 OBM QD QD
+OBM BM2 OBMBM BM2 OBM QF2 QF2 OBM BM2 OBMBM BM2 OBM QD QD
+
+OBM BM2 OBMBM BM2 OBM QF2 QF2 OBM BM2 OBMBM BM2 OBM QD QD
+OBM BM2 OBMBM BM2 OBM QF1 QF1 OBM BM2 OBMBM BM2 OBM QD QD
+OBM BM2 OBMBM BM2 OBM QF2 QF2 OBM BM2 OBMBM BM2 OBM QD QD
+
+OBM BM2 OBMBM BM2 OBM QF2 QF2 OBM BM2 OBMBM BM2 OBM QD QD
+OBM BM2 OBMBM BM2 OBM QF1 QF1 OBM BM2 OBMBM BM2 OBM QD QD
+OBM BM2 OBMBM BM2 OBM QF2 QF2 OBM BM2 OBMBM BM2 OBM QD QD
+
+OBM BM2 OBMBM BM2 OBM QF2 QF2 OBM BM2 OBMBM BM2 OBM QD QD
+OBM BM2 OBMBM BM2 OBM QF1 QF1 OBM BM2 OBMBM BM2 OBM QD QD
+OBM BM2 OBMBM BM2 OBM QF2 QF2 OBM BM2 OBMBM BM2 OBM QD
+
+#====================================SS===========================================================
+QDs
+OD QFs1 QFs1 OD QDs QDs 
+OD QFs1 QFs1 OD QDs QDs
+OD QFs1 QFs1 OD QDs QDs
+OD QFs1 QFs1 OD QDs QDs
+
+OD QFs1 QFs1 OD QDs QDs 
+OD QFs1 QFs1 OD QDs QDs
+OD QFs1 QFs1 OD QDs QDs
+OD QFs1 QFs1 OD QDs QDs
+
+OD QFs1 QFs1 OD QDs QDs 
+OD QFs1 QFs1 OD QDs QDs
+OD QFs1 QFs1 OD QDs QDs
+OD QFs1 QFs1 OD QDs

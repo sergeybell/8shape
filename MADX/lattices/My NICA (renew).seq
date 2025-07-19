@@ -4,8 +4,11 @@
 !  BetaX=0.6 m,  AlphaX=0,  BetaY=0.6 m,  AlphaY=0
 !  DispX=0 m,  DispPX=0,  DispY=0 m,  DispPY=0
 
+!OPTION, -ECHO;
+!ASSIGN, ECHO="line.echo";
+
 OPTION, -ECHO;
-ASSIGN, ECHO="line.echo";
+ASSIGN, ECHO="line_echo.txt";
 
 HD: MONITOR ;
 MB2L: MULTIPOLE,  KNL:={0,0,0.05750859885};
@@ -226,10 +229,9 @@ beam, MASS=2.32283962,CHARGE=1, ENERGY=13.54435861,
 
 use,period=machine;
 
-twiss energy=13.54435861, betx=0.6, alfx=0,
-     bety=0.6, alfy=0,
-     dx=0, dpx=0,
-     dy=0, dpy=0;
+TWISS, deltap=0.0:0.005:0.001, save;
+
+TWISS, file = "line.twiss";
 
 survey,;
 
