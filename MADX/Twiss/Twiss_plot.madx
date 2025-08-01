@@ -1,0 +1,21 @@
+!MAC edition
+CHDIR, DIR = "/Users/Bell/GIT_REPOS/8shape/MADX/lattices/";
+CALL FILE = "8-shape (48 mags 270 deg) resonant.seq";
+TITLE, "Twiss in 8shape";
+
+beam, MASS=1,CHARGE=1, ENERGY=13.54435861,
+      EX=2e-05, EY=2e-05, SIGE=0.001;
+
+!USE, PERIOD = MACHINE;
+!SAVEBETA, LABEL=end, PLACE=#e, SEQUENCE=MACHINE;
+!twiss;
+!show, end;
+USE, PERIOD = MACHINE;
+CHDIR, DIR = "/Users/Bell/GIT_REPOS/8shape/MADX";
+!TWISS, BETA0=END, DX = 0.0, DPX = 0.0, file=tbl/twiss.tbl;
+Twiss;
+TWISS, file=tbl/twiss.tbl;
+plot, haxis=s, vaxis1=betx,bety, vaxis2=dx, colour=100, style=1, noversion, file=img/twiss;
+stop;
+!twiss,deltap=-0.0001:0.0001:0.00005;
+!plot,table=summ,haxis=q1,vaxis=q2;

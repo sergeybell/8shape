@@ -3,16 +3,16 @@ enter Twiss module
 ++++++ table: summ
 
             length             orbit5               alfa            gammatr 
-         511.37296                 -0                  0                  0 
+         486.01296                 -0     0.000334007714        54.71693365 
 
                 q1                dq1            betxmax              dxmax 
-       8.782284113                  0        30.31844017         5.61332821 
+       7.243960569       -13.48048345        44.45937401        10.77146646 
 
              dxrms             xcomax             xcorms                 q2 
-       2.872215339                  0                  0        7.669771342 
+       3.831568747                  0                  0        8.894549551 
 
                dq2            betymax              dymax              dyrms 
-                 0        31.14349337                  0                  0 
+      -11.06111018        42.35850462                  0                  0 
 
             ycomax             ycorms             deltap            synch_1 
                  0                  0                  0                  0 
@@ -20,8 +20,29 @@ enter Twiss module
            synch_2            synch_3            synch_4            synch_5 
                  0                  0                  0                  0 
 
-           synch_6            synch_8             nflips              dqmin 
+            nflips 
+                 0 
+enter Twiss module
+
+++++++ table: summ
+
+            length             orbit5               alfa            gammatr 
+         486.01296                 -0     0.000334007714        54.71693365 
+
+                q1                dq1            betxmax              dxmax 
+       7.243960569       -13.48048345        44.45937401        10.77146646 
+
+             dxrms             xcomax             xcorms                 q2 
+       3.831568747                  0                  0        8.894549551 
+
+               dq2            betymax              dymax              dyrms 
+      -11.06111018        42.35850462                  0                  0 
+
+            ycomax             ycorms             deltap            synch_1 
                  0                  0                  0                  0 
 
-       dqmin_phase 
+           synch_2            synch_3            synch_4            synch_5 
+                 0                  0                  0                  0 
+
+            nflips 
                  0 
